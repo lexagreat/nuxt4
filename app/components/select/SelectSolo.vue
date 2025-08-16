@@ -12,17 +12,19 @@ const output = ref(null);
 const modelValue = defineModel<IOption | null>();
 
 function toggleOptions(event: Event) {
+  const target = event.target as HTMLElement;
   if (!props.options.length) return;
-  event.target.closest('.v-select').classList.toggle('open');
+  target.closest('.v-select')?.classList.toggle('open');
 }
 
 function updateValue(event: Event) {
-  if (modelValue.value == event.target?.value) {
+  const target = event.target as HTMLInputElement;
+  if (modelValue.value == target?.value) {
     modelValue.value = null;
   } else {
-    modelValue.value = props.options.find((item) => item.value == event.target?.value);
+    modelValue.value = props.options.find((item) => item.value == target?.value);
   }
-  event.target?.closest('.v-select').classList.remove('open');
+  target?.closest('.v-select')?.classList.remove('open');
 }
 </script>
 
@@ -31,7 +33,7 @@ function updateValue(event: Event) {
     <div class="v-select__backdrop"></div>
     <div class="v-select__wrapper" :class="{ placeholder: placeholder }" ref="output">
       <span class="v-select__input">
-        {{ modelValue?.name }}
+        {{ modelValue?.name || placeholder }}
       </span>
       <div class="v-select__icon">
         <!-- <ArrowDownIcon /> -->
