@@ -1,0 +1,35 @@
+@import "nullstyle";
+
+.wrapper {
+   min-height: 100vh;
+   display: flex;
+   flex-direction: column;
+}
+.main {
+   flex: 1;
+   // padding-top: var(--headerHeight);
+}
+
+.collapse:not(.collapse_show) {
+   display: none;
+}
+
+.container {
+   max-width: 1440px;
+   margin: 0 auto;
+   // padding: 0 var(--containerPadding);
+}
+.circle {
+   --size: 32px;
+   flex: 0 0 var(--size);
+   width: var(--size);
+   height: var(--size);
+   border-radius: 50%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+label {
+   cursor: pointer;
+}
