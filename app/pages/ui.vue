@@ -23,12 +23,18 @@ const checkedOptions = ref<IOption[]>([]);
 type FormDataType = {
   EMAIL: IFormTextInput;
   PASSWORD: IFormTextInput;
+  PHONE: IFormTextInput;
 };
 
 const formData = ref<FormDataType>({
   EMAIL: {
     value: '',
     type: 'email',
+    required: true,
+  },
+  PHONE: {
+    value: '',
+    type: 'phone',
     required: true,
   },
   PASSWORD: {
@@ -50,9 +56,9 @@ function validate() {
     item.validate() ? '' : errors.push(Object.keys(formData.value)[index] || '');
   });
   if (!errors.length) {
-    alert('success');
+    console.log('success');
   } else {
-    alert(errors);
+    console.log(errors);
   }
 }
 </script>
@@ -89,6 +95,7 @@ function validate() {
               v-model="formData[key as keyof FormDataType].value"
               :required="formData[key as keyof FormDataType].required"
               :type="formData[key as keyof FormDataType].type"
+              :phone="formData[key as keyof FormDataType].type == 'phone'"
             />
           </li>
           <button @click="validate">validate</button>
@@ -96,42 +103,42 @@ function validate() {
       </div>
       <div class="ui-page__section">
         <div class="ui-page__title">Радио, Чекбоксы</div>
-        <ul class="ui-page__items">
-          {{
-            radio
-          }}
-          <li>
-            <FormRadio v-model="radio" name="radioBtn" value="0">value 0</FormRadio>
-          </li>
-          <li>
-            <FormRadio v-model="radio" name="radioBtn" value="1">value 1</FormRadio>
-          </li>
-          <li>
-            <FormRadio v-model="radio" name="radioBtn" value="2">value 2</FormRadio>
-          </li>
-        </ul>
-        <ul class="ui-page__items">
-          {{
-            checkbox
-          }}
-          <li>
-            <FormCheckbox v-model="checkbox">check</FormCheckbox>
-          </li>
-        </ul>
-        <ul class="ui-page__items">
-          {{
-            checkboxMultiple
-          }}
-          <li>
-            <FormCheckboxMultiple v-model="checkboxMultiple" value="0">value 0</FormCheckboxMultiple>
-          </li>
-          <li>
-            <FormCheckboxMultiple v-model="checkboxMultiple" value="1">value 1</FormCheckboxMultiple>
-          </li>
-          <li>
-            <FormCheckboxMultiple v-model="checkboxMultiple" value="2">value 2</FormCheckboxMultiple>
-          </li>
-        </ul>
+        <div style="display: flex; flex-direction: column; gap: 8px">
+          Значение: {{ radio }}
+          <ul class="ui-page__items">
+            <li>
+              <FormRadio v-model="radio" name="radioBtn" value="0">value 0</FormRadio>
+            </li>
+            <li>
+              <FormRadio v-model="radio" name="radioBtn" value="1">value 1</FormRadio>
+            </li>
+            <li>
+              <FormRadio v-model="radio" name="radioBtn" value="2">value 2</FormRadio>
+            </li>
+          </ul>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px">
+          Значение: {{ checkbox }}
+          <ul class="ui-page__items">
+            <li>
+              <FormCheckbox v-model="checkbox">check</FormCheckbox>
+            </li>
+          </ul>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px">
+          Значение: {{ checkboxMultiple }}
+          <ul class="ui-page__items">
+            <li>
+              <FormCheckboxMultiple v-model="checkboxMultiple" value="0">value 0</FormCheckboxMultiple>
+            </li>
+            <li>
+              <FormCheckboxMultiple v-model="checkboxMultiple" value="1">value 1</FormCheckboxMultiple>
+            </li>
+            <li>
+              <FormCheckboxMultiple v-model="checkboxMultiple" value="2">value 2</FormCheckboxMultiple>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </main>
