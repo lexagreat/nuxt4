@@ -1,6 +1,6 @@
 import type { IFetchOptions } from '~/types';
 
-export function useBaseFetch<T>(request: string, opts?: IFetchOptions<T>) {
+export function fetcher<T>(request: string, opts?: IFetchOptions<T>) {
   const config = useRuntimeConfig();
 
   return useFetch<T>(request, {
